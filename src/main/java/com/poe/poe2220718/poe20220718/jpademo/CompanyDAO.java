@@ -5,17 +5,17 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-public class PersonDAO {
+public class CompanyDAO {
     
-    public static void enregistrer(Person personToCreate) {
+    public static void create(Company companyToCreate) {
         
         EntityManager entityManager = EntityManagerSingleton.getEntityManager();
         EntityTransaction tx = entityManager.getTransaction();
                 
         try {
-            System.out.println("create()");
+            System.out.println("company create()");
             tx.begin();
-            entityManager.persist(personToCreate);//save()
+            entityManager.persist(companyToCreate);
             tx.commit();
         }
         catch(Exception e) {
@@ -24,52 +24,52 @@ public class PersonDAO {
         }
     }
     
-    public static Person chercherParId(Long id){
+    public static Company findById(Long id){
          EntityManager entityManager = EntityManagerSingleton.getEntityManager();
          
-         Person p = entityManager.find(Person.class, id);
+         Company c = entityManager.find(Company.class, id);
          
-         return p;
+         return c;
     }
     
-    public static List<Person> chercherToutesLesPersonnes(){
+    public static List<Company> findAll(){
         
         EntityManager entityManager = EntityManagerSingleton.getEntityManager();     
         
-        Query query = entityManager.createQuery("SELECT p from Person p"); // SELECT * FROM persons;
+        Query query = entityManager.createQuery("SELECT c from Company c");
         return query.getResultList();
     }
     
-    public static void supprimerUnePersonne(Person personneASupprimer){
+    public static void delete(Company company){
         EntityManager entityManager = EntityManagerSingleton.getEntityManager();     
             EntityTransaction tx = entityManager.getTransaction();
         
         tx.begin();
-        entityManager.remove(personneASupprimer);
+        entityManager.remove(company);
         tx.commit();
     }
     
-    public static void supprimerParId(Long id) {
+    public static void deleteById(Long id) {
         EntityManager entityManager = EntityManagerSingleton.getEntityManager();     
         EntityTransaction tx = entityManager.getTransaction();
         
         tx.begin();
-        Query query = entityManager.createQuery("DELETE from Person p where p.id= :id");
+        Query query = entityManager.createQuery("DELETE from Company c where c.id= :id");
         query.setParameter("id", id);
         query.executeUpdate();
         tx.commit();
     }
     
-    public static void modifierPersonne(Long id, Person newData){
+    public static void update(Long id, Company newData){
         EntityManager entityManager = EntityManagerSingleton.getEntityManager();
         
-        Person personToUpdate = chercherParId(id);
+        Company companyToUpdate = findById(id);
         
-        personToUpdate.setNotNullData(newData);
+        companyToUpdate.setNotNullData(newData);
         
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
-        entityManager.merge(personToUpdate);
+        entityManager.merge(companyToUpdate);
         tx.commit();
     }
 }
