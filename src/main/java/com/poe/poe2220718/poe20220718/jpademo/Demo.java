@@ -31,9 +31,20 @@ public class Demo {
 //        CompanyDAO.create(google);  
 
         
-        System.out.println(marie.getCompany());
-        System.out.println(google.getPersons().size());
+//        System.out.println(marie.getCompany());
+//        System.out.println(google.getPersons().size());
         
+
+            Project projet1 = new Project("Mission 1");
+            projet1.getPersons().add(marie);
+            projet1.getPersons().add(alain);
+            ProjectDAO.create(projet1);
+            
+            Project projet2 = new Project("Mission 2");
+            projet2.getPersons().add(marie);
+            ProjectDAO.create(projet2);
+
+
 //        Person said = new Person("Said", "Dupont");
 //        PersonDAO.enregistrer(said);  
 
