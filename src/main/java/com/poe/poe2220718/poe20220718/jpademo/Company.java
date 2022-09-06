@@ -1,9 +1,14 @@
 package com.poe.poe2220718.poe20220718.jpademo;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,6 +22,10 @@ public class Company {
     private String name;
     private String country;
     private String city;
+    
+    @OneToMany
+    @JoinColumn(name="company_id")
+    private List<Person> persons = new ArrayList<>();
 
     public Company() {
     }
@@ -56,6 +65,14 @@ public class Company {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
     }
 
     @Override

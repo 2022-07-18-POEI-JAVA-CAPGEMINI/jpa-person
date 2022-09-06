@@ -14,13 +14,25 @@ public class Demo {
         Person marie = new Person("Marie", "Dupont");
         marie.setCity("Paris");
         marie.setAge(33);
+        
+        Company google =  new Company("Google", "USA", "Seatle");
+        CompanyDAO.create(google);       
+        marie.setCompany(google);
         PersonDAO.enregistrer(marie);
+        Person marie2 = PersonDAO.chercherParId(2L);
+        System.out.println(marie2);
+        System.out.println(marie2.getCompany());
         
-        Company company1 =  new Company("Google", "USA", "Seatle");
-        CompanyDAO.create(company1);
+
+           
+//        PersonDAO.enregistrer(marie);
+//        Company google =  new Company("Google", "USA", "Seatle");
+//        google.getPersons().add(marie);
+//        CompanyDAO.create(google);  
+
         
-        
-        
+        System.out.println(marie.getCompany());
+        System.out.println(google.getPersons().size());
         
 //        Person said = new Person("Said", "Dupont");
 //        PersonDAO.enregistrer(said);  
